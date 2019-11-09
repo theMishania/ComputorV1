@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Equation {
+public struct Equation {
     let freeCoeficient: Int
     let coeficinets: [Int]
     
@@ -24,10 +24,21 @@ class Equation {
     var hasNoSolutions: Bool {
         return coeficinets.isEmpty && freeCoeficient != 0 ||
         coeficinets.allSatisfy({$0 == 0}) && freeCoeficient != 0
+        
     }
     
     var solutionIsEveryRealNumber: Bool {
         return coeficinets.isEmpty && freeCoeficient == 0 ||
         coeficinets.allSatisfy({$0 == 0}) && freeCoeficient == 0
+    }
+    
+    var degree: Int {
+        var result = 0
+        for (index, coef) in coeficinets.enumerated() {
+            if coef != 0 {
+                result = index + 1
+            }
+        }
+        return result
     }
 }

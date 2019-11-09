@@ -10,7 +10,7 @@ import XCTest
 
 class SecondDegreeSolverTests: XCTestCase {
     
-    var sut: SecondDegreeSolver!
+    var sut: EquationSolver!
 
     override func setUp() {
         
@@ -21,31 +21,31 @@ class SecondDegreeSolverTests: XCTestCase {
     }
     
     func testInitCreatesSolver() {
-        sut = SecondDegreeSolver(equation: Equation())
+        sut = EquationSolver(equation: Equation())
         
         XCTAssertNotNil(sut)
     }
     
     func testWhenCoefsEmptySolverDetectsNoSolutionCase() {
-        sut = SecondDegreeSolver(equation: Equation(xCoeficients: [], freeCoeficient: 24))
+        sut = EquationSolver(equation: Equation(xCoeficients: [], freeCoeficient: 24))
         
         XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 24")
     }
     
     func testWhenAllCoefsAreZerosSolverDetectsNoSolution() {
-        sut = SecondDegreeSolver(equation: Equation(xCoeficients: [0,0,0,0,0,0], freeCoeficient: 100))
+        sut = EquationSolver(equation: Equation(xCoeficients: [0,0,0,0,0,0], freeCoeficient: 100))
         
         XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 100")
     }
     
     func testCoefsAreEmptyAndFreeCoefIsZeroResultEveryRealNumberSolution() {
-        sut = SecondDegreeSolver(equation: Equation(xCoeficients: [], freeCoeficient: 0))
+        sut = EquationSolver(equation: Equation(xCoeficients: [], freeCoeficient: 0))
         
         XCTAssertEqual(sut.solve(), "Solution is every number")
     }
     
     func testZeroCoefsAndZeroFreeCoefResultEveryRealNumberSolution() {
-        sut = SecondDegreeSolver(equation: Equation(xCoeficients: [0,0,0,0,0,0], freeCoeficient: 0))
+        sut = EquationSolver(equation: Equation(xCoeficients: [0,0,0,0,0,0], freeCoeficient: 0))
         
         XCTAssertEqual(sut.solve(), "Solution is every number")
     }

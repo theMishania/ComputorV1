@@ -72,4 +72,58 @@ class EquationTests: XCTestCase {
         XCTAssertTrue(sut.solutionIsEveryRealNumber)
     }
     
+    
+    //MARK: - Degree recognition
+    func testWhenOneCoefIsGivenEqtionIsFirstDegree() {
+        sut = Equation(xCoeficients: [2], freeCoeficient: 23)
+        
+        XCTAssertEqual(sut.degree, 1)
+    }
+    
+    func testWhenGivenSomeCoefsOfZeroStillDegreeIsFirst() {
+        sut = Equation(xCoeficients: [2, 0, 0, 0], freeCoeficient: 100)
+        
+        XCTAssertEqual(sut.degree, 1)
+    }
+    
+    func testWhenTwoCoefsAreGivenDegreeIsSecond() {
+        sut = Equation(xCoeficients: [2, 4], freeCoeficient: 100)
+        
+        XCTAssertEqual(sut.degree, 2)
+    }
+    
+    func testWhenMoveThanTowIsGivenOfZerosStillDegreeIsSecond() {
+        sut = Equation(xCoeficients: [2, 4, 0, 0, 0, 0], freeCoeficient: 100)
+        
+        XCTAssertEqual(sut.degree, 2)
+    }
+    
+    func testMoreCoefsAreGiven() {
+        sut = Equation(xCoeficients: [2, 0, 2, 0, 0, 0], freeCoeficient: 100)
+        
+        XCTAssertEqual(sut.degree, 3)
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
