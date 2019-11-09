@@ -8,10 +8,10 @@
 import Foundation
 
 public struct Equation {
-    let freeCoeficient: Int
-    let coeficinets: [Int]
+    let freeCoeficient: Double
+    let coeficinets: [Double]
     
-    public init(xCoeficients: [Int], freeCoeficient: Int) {
+    public init(xCoeficients: [Double], freeCoeficient: Double) {
         coeficinets = xCoeficients
         self.freeCoeficient = freeCoeficient
     }

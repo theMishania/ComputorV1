@@ -29,13 +29,13 @@ class SecondDegreeSolverTests: XCTestCase {
     func testWhenCoefsEmptySolverDetectsNoSolutionCase() {
         sut = EquationSolver(equation: Equation(xCoeficients: [], freeCoeficient: 24))
         
-        XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 24")
+        XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 24.0")
     }
     
     func testWhenAllCoefsAreZerosSolverDetectsNoSolution() {
         sut = EquationSolver(equation: Equation(xCoeficients: [0,0,0,0,0,0], freeCoeficient: 100))
         
-        XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 100")
+        XCTAssertEqual(sut.solve(), "There is no solutions\n" + "0 is not equal 100.0")
     }
     
     func testCoefsAreEmptyAndFreeCoefIsZeroResultEveryRealNumberSolution() {
