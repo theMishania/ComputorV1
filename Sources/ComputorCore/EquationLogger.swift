@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EquationLogger {
+public struct EquationLogger {
     let equation: Equation
     
     public init(equation: Equation) {

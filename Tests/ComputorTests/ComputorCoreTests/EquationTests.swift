@@ -73,7 +73,13 @@ class EquationTests: XCTestCase {
     }
     
     
-    //MARK: - Degree recognition
+    //MARK: - Degree recognitio
+    func testWhenNoCoefsAndOnlyFreeCoefResultsInZeroDegree() {
+        sut = Equation(xCoeficients: [:], freeCoeficient: 23)
+        
+        XCTAssertEqual(sut.degree, 0)
+    }
+    
     func testWhenOneCoefIsGivenEqtionIsFirstDegree() {
         sut = Equation(xCoeficients: [1: 2], freeCoeficient: 23)
         
