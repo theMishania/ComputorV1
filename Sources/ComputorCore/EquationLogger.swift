@@ -25,7 +25,7 @@ public struct EquationLogger {
             firstLoop = false
         }
         result += " = 0"
-        print(result)
+        print("Reduced form: " + result)
         return result
     }
     
