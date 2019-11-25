@@ -94,17 +94,10 @@ public class EquationParser {
             var match = matches(for: "[^\\^]\\d+(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
             match += matches(for: "^\\d(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
             if degree == 0 {
-                
-                //TODO: - Replace wrong regex for 0 degree
                 match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+\\b(?!\\*|x)", in: part)
-                match += matches(for: "^\\d(?=\\+|\\-)", in: part)
-                if part.count == 1 {
-                    match += matches(for: "^\\d\\b", in: part)
-                }
             }
             if degree == 1 {
                 match += matches(for: "[^\\^]\\d+(?=x)(?!x\\^)", in: part)
-                
             }
             let intMatch = match.map { element -> Double in
                 if let intElement = Double(element) {

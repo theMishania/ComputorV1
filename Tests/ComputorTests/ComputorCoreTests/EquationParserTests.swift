@@ -313,4 +313,17 @@ class EquationParserTests: XCTestCase {
         XCTAssertEqual(sut.coefs.count, 2)
         XCTAssertEqual(sut.coefs[210], 1)
     }
+    
+    func testDefferentDegreesWithMoreComplexForm() {
+        let sut = EquationParser(input: "2 - x^5 + 10x^34 + 234*x^0=54x + 35 - x^4")
+        
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, 201)
+        XCTAssertEqual(sut.coefs.count, 4)
+        XCTAssertEqual(sut.coefs[5], -1)
+        XCTAssertEqual(sut.coefs[4], 1)
+        XCTAssertEqual(sut.coefs[34], 10)
+        XCTAssertEqual(sut.coefs[1], -54)
+    }
 }
