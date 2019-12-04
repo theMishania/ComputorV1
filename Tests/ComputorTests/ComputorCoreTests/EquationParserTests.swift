@@ -170,6 +170,24 @@ class EquationParserTests: XCTestCase {
     }
     
     //MARK: - First Degree Equation Parsing
+    func testOnlyXInEquation() {
+        let sut = EquationParser(input: "x=4")
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, -4.0)
+        XCTAssertEqual(sut.coefs.count, 1)
+        XCTAssertEqual(sut.coefs[1], 1)
+    }
+    
+    func testOnlyXButWithOneCoef() {
+        let sut = EquationParser(input: "1x=4")
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, -4.0)
+        XCTAssertEqual(sut.coefs.count, 1)
+        XCTAssertEqual(sut.coefs[1], 1)
+    }
+    
     func testSimpleEquationParsing() {
         let sut = EquationParser(input: "45-2*x^1=35")
         sut.parse()

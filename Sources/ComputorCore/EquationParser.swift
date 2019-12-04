@@ -97,7 +97,7 @@ public class EquationParser {
                 match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+\\b(?!\\*|x)", in: part)
             }
             if degree == 1 {
-                match += matches(for: "[^\\^]\\d+(?=x)(?!x\\^)", in: part)
+                match += matches(for: "[^\\^]\\d*(?=x)(?!x\\^)", in: part)
             }
             let intMatch = match.map { element -> Double in
                 if let intElement = Double(element) {
