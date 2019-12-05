@@ -332,7 +332,7 @@ class EquationParserTests: XCTestCase {
         XCTAssertEqual(sut.coefs[210], 1)
     }
     
-    func testDefferentDegreesWithMoreComplexForm() {
+    func testDifferentDegreesWithMoreComplexForm() {
         let sut = EquationParser(input: "2 - x^5 + 10x^34 + 234*x^0=54x + 35 - x^4")
         
         sut.parse()
@@ -342,6 +342,45 @@ class EquationParserTests: XCTestCase {
         XCTAssertEqual(sut.coefs[5], -1)
         XCTAssertEqual(sut.coefs[4], 1)
         XCTAssertEqual(sut.coefs[34], 10)
+        XCTAssertEqual(sut.coefs[1], -54)
+    }
+    
+    //MARK: - Double Coefs Testing
+    
+    func testZeroDegreeEquationWithDoubleCoefs() {
+        let sut = EquationParser(input: "6 - 1.0  = -2.5")
+        
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, 7.5)
+        XCTAssertEqual(sut.coefs.count, 0)
+    }
+    
+    func testZeroDegreeEquationWithMoreNumberOfDoubleAndInt() {
+        let sut = EquationParser(input: "56 + 7.2 - 100.564+45 = 23.92 - 40")
+        
+        sut.parse()
+        
+        XCTAssertEqual(Float(sut.freeCoef), 23.716)
+        XCTAssertEqual(sut.coefs.count, 0)
+    }
+    
+    func testZeroDegreeEquationWithXInZeroDegree() {
+        let sut = EquationParser(input: "5.7 + 1 * x^0= 1.33x^0")
+        
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, 5.37)
+        XCTAssertEqual(sut.coefs.count, 0)
+    }
+    
+    func testfirstDegreeEquationWithDoubleCoefs() {
+        let sut = EquationParser(input: "4.7 * x^1 - 2.3x^1 + 2= -5.76")
+        
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, 7.76)
+        XCTAssertEqual(sut.coefs.count, 1)
         XCTAssertEqual(sut.coefs[1], -54)
     }
 }

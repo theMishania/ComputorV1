@@ -91,10 +91,10 @@ public class EquationParser {
             degrees.append(0)
         }
         for degree in degrees {
-            var match = matches(for: "[^\\^]\\d+(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
+            var match = matches(for: "[^\\^]\\d+[.]*\\d*(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
             match += matches(for: "^\\d(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
             if degree == 0 {
-                match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+\\b(?!\\*|x)", in: part)
+                match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+[.]*\\d*\\b(?!\\*|x)", in: part)
             }
             if degree == 1 {
                 match += matches(for: "[^\\^]\\d*(?=x)(?!x\\^)", in: part)

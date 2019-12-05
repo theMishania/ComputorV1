@@ -36,13 +36,13 @@ public struct EquationLogger {
             if isFirst {
                 return "\(coeficient) * \(degreeStr)"
             } else {
-                return " + \(coeficient) * \(degreeStr)"
+                return " + \(Float(coeficient)) * \(degreeStr)"
             }
         } else {
             if isFirst {
-                return "-\(-coeficient) * \(degreeStr)"
+                return "-\(-Float(coeficient)) * \(degreeStr)"
             } else {
-                return " - \(-coeficient) * \(degreeStr)"
+                return " - \(-Float(coeficient)) * \(degreeStr)"
             }
         }
     }
