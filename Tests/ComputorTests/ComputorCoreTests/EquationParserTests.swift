@@ -381,6 +381,27 @@ class EquationParserTests: XCTestCase {
         
         XCTAssertEqual(sut.freeCoef, 7.76)
         XCTAssertEqual(sut.coefs.count, 1)
-        XCTAssertEqual(sut.coefs[1], -54)
+        XCTAssertEqual(Float(sut.coefs[1]!), 2.4)
+    }
+    
+    func testFirstDegreeEquationWithSimpleX() {
+        let sut = EquationParser(input: "56.42x+54-2.1x=3.1x^1-4x^0")
+        
+        sut.parse()
+        
+        XCTAssertEqual(sut.freeCoef, 58)
+        XCTAssertEqual(sut.coefs.count, 1)
+        XCTAssertEqual(Float(sut.coefs[1]!), 51.22)
+    }
+    
+    func testSecondDegreeEquationWithDoubleCoefs() {
+        let sut = EquationParser(input: "20.002x^2 + 10.4x^1 - 25.7x^0=x-0.1+4x^2")
+        
+        sut.parse()
+        
+        XCTAssertEqual(Float(sut.freeCoef), -25.6)
+        XCTAssertEqual(sut.coefs.count, 2)
+        XCTAssertEqual(Float(sut.coefs[1]!), 9.4)
+        XCTAssertEqual(Float(sut.coefs[2]!), 16.002)
     }
 }

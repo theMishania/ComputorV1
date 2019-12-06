@@ -36,30 +36,30 @@ public class EquationParser {
         return Equation(xCoeficients: coefs, freeCoeficient: freeCoef)
     }
     
-    func formatEquationParts(_ part: inout String) {
+    private func formatEquationParts(_ part: inout String) {
         addPlusSignAtStartIndex(to: &part)
         addMissingOnes(to: &part)
     }
     
-    func addPlusSignAtStartIndex(to str: inout String) {
+    private func addPlusSignAtStartIndex(to str: inout String) {
         guard str.count > 0 else { return }
         if str[0] == "x" {
             str.insert("+", at: str.startIndex)
         }
     }
     
-    func removeWhitespacesAndTabs() {
+    private func removeWhitespacesAndTabs() {
         inputString = inputString.replacingOccurrences(of: " ", with: "")
         inputString = inputString.replacingOccurrences(of: "\t", with: "")
         inputString = inputString.replacingOccurrences(of: "\n", with: "")
     }
     
-    func addMissingOnes(to str: inout String) {
+    private func addMissingOnes(to str: inout String) {
         str = str.replacingOccurrences(of: "-x", with: "-1x")
         str = str.replacingOccurrences(of: "+x", with: "+1x")
     }
     
-    func devideEquationByEqualSign() -> (String, String) {
+    private func devideEquationByEqualSign() -> (String, String) {
         let equations = inputString.components(separatedBy: "=")
         guard equations.count == 2 else {
             print("Wrong format")
@@ -68,7 +68,7 @@ public class EquationParser {
         return (equations[0], equations[1])
     }
     
-    func countAllDegreesIn(equation: String) -> [Int] {
+    private func countAllDegreesIn(equation: String) -> [Int] {
         var result = countFirstDegreeIn(equation: equation)
         let degreesMatches = matches(for: "(?<=\\^)\\d+(?!\\d)", in: inputString)
         
@@ -80,24 +80,24 @@ public class EquationParser {
         return result
     }
     
-    func countFirstDegreeIn(equation: String) -> [Int] {
+    private func countFirstDegreeIn(equation: String) -> [Int] {
         let xMatches = matches(for: "x(?!\\^)", in: equation)
         return xMatches.count > 0 ? [1] : []
     }
     
-    func parseEquationPart(part: String, multipliedBy: Int) {
+    private func parseEquationPart(part: String, multipliedBy: Int) {
         var degrees = countAllDegreesIn(equation: part)
         if !degrees.contains(0) {
             degrees.append(0)
         }
         for degree in degrees {
-            var match = matches(for: "[^\\^]\\d+[.]*\\d*(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
-            match += matches(for: "^\\d(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
+            var match = matches(for: "[+-]?(?<!\\^|\\d)\\d+\\.*\\d*(?=\\*x\\^\(degree)|x\\^\(degree))", in: part)
             if degree == 0 {
-                match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+[.]*\\d*\\b(?!\\*|x)", in: part)
+                match += matches(for: "[+-]*(?<!\\.)(?<!\\^)(?<!\\d)\\d+\\b(?!\\*|x)(?!\\.)", in: part)
+                match += matches(for: "[+-]*(?<!\\^)(?<!\\d)\\d+[.]+\\d+\\b(?!\\*|x)", in: part)
             }
             if degree == 1 {
-                match += matches(for: "[^\\^]\\d*(?=x)(?!x\\^)", in: part)
+                match += matches(for: "[^\\^]\\d*[.]?\\d*(?=x)(?!x\\^)", in: part)
             }
             let intMatch = match.map { element -> Double in
                 if let intElement = Double(element) {
