@@ -50,7 +50,7 @@ public struct EquationSolver {
         if solution == 0 {
             return "The solution is:\n0"
         }
-        return "The solution is:\n\(solution)"
+        return "The solution is:\n\(Float(solution))"
     }
     
     
@@ -71,9 +71,9 @@ public struct EquationSolver {
         let x2 = (Double(-b) - sqrt(discriminant)) / Double((2 * a))
         
         if discriminant == 0 {
-            return "Discriminant is equal to zero. The only solution is:\n\(x1)"
+            return "Discriminant is equal to zero. The only solution is:\n\(Float(x1))"
         }
-        return "Discriminant is strictly positive, the two solutions are:\n\(x1)\n\(x2)"
+        return "Discriminant is strictly positive, the two solutions are:\n\(Float(x1))\n\(Float(x2))"
     }
     
     

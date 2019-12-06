@@ -34,7 +34,7 @@ public struct EquationLogger {
         let degreeStr = degree == 1 ? "x" : "x^\(degree)"
         if coeficient >= 0 {
             if isFirst {
-                return "\(coeficient) * \(degreeStr)"
+                return "\(Float(coeficient)) * \(degreeStr)"
             } else {
                 return " + \(Float(coeficient)) * \(degreeStr)"
             }
