@@ -48,7 +48,7 @@ public class EquationParser {
         }
     }
     
-    private func removeWhitespacesAndTabs() {
+    func removeWhitespacesAndTabs() {
         inputString = inputString.replacingOccurrences(of: " ", with: "")
         inputString = inputString.replacingOccurrences(of: "\t", with: "")
         inputString = inputString.replacingOccurrences(of: "\n", with: "")
@@ -59,7 +59,7 @@ public class EquationParser {
         str = str.replacingOccurrences(of: "+x", with: "+1x")
     }
     
-    private func devideEquationByEqualSign() -> (String, String) {
+    func devideEquationByEqualSign() -> (String, String) {
         let equations = inputString.components(separatedBy: "=")
         guard equations.count == 2 else {
             print("Wrong format")
@@ -68,7 +68,7 @@ public class EquationParser {
         return (equations[0], equations[1])
     }
     
-    private func countAllDegreesIn(equation: String) -> [Int] {
+    func countAllDegreesIn(equation: String) -> [Int] {
         var result = countFirstDegreeIn(equation: equation)
         let degreesMatches = matches(for: "(?<=\\^)\\d+(?!\\d)", in: inputString)
         
@@ -80,7 +80,7 @@ public class EquationParser {
         return result
     }
     
-    private func countFirstDegreeIn(equation: String) -> [Int] {
+    func countFirstDegreeIn(equation: String) -> [Int] {
         let xMatches = matches(for: "x(?!\\^)", in: equation)
         return xMatches.count > 0 ? [1] : []
     }
